@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import exampleImg from '@/assets/img-group.png'
 import ReactStars from 'react-stars'
 
 const Cart = () => {
@@ -14,8 +13,9 @@ const Cart = () => {
         })
     }, [])
 
-    console.log(productsDetail)
-    // console.log(productIds)
+    const ratingChanged = (newRating) => {
+        console.log(newRating)
+      }
 
     useEffect(() => {
         if (productIds.length) {
@@ -42,7 +42,6 @@ const Cart = () => {
 
             fetchProductDetails();
         }
-
 
 
     }, [productIds])
@@ -72,8 +71,8 @@ const Cart = () => {
                 <div className='flex gap-1 items-center '>
                     <ReactStars
                         count={5}
-                        // onChange={ratingChanged}
-                        size={24}
+                        value={details.rating.rate}
+                        size={20}
                         color2={'#ffd700'} />
                     <p className='text-sm text-red-500'>{details.rating.rate}</p>
                 </div>
@@ -85,7 +84,7 @@ const Cart = () => {
 
     return (
         <section className='mt-[113px] mx-auto w-[85%] flex flex-col gap-3'>
-            <p className='text-black font-bold text-2xl '>My cart (3)</p>
+            <p className='text-black font-bold text-2xl '>My cart ({productsDetail.length})</p>
             <div className=' flex gap-2'>
                 <div className='flex flex-col gap-1 bg-white w-[70%] p-5 rounded'>
                     {cartDetailsElemets}
